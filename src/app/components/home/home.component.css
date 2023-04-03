@@ -1,0 +1,23 @@
+ul {
+  list-style-type: none;
+}
+
+.div_user{
+  display: flex;
+}
+
+.div_user>h3{
+  font-size: 18px;
+  margin: auto 10px ;
+}
+
+.div_user>img{
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+}
+
+
+
+
+
