@@ -16,7 +16,7 @@ export class ReqresService {
   }
 
   public getUser(id: number): Observable<User> {
-    const url = `$this.url/${id}`;
+    const url = `${this.url}/${id}`;
       return this.http.get<User>(url);
   }
 }

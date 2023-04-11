@@ -1,6 +1,7 @@
 import { User } from './../../user';
 import { ReqresService } from './../../services/reqres.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -9,22 +10,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
   users: User[] = [];
-  constructor(private reqresService: ReqresService) {
+
+  constructor(private reqresService: ReqresService, private router: Router) {
     this.getUsers();
   }
 
   public getUsers() {
     console.log(this.reqresService.getUsers());
     this.reqresService.getUsers().subscribe(
-      (res: User[]) => {
-        this.users = res;
+      (response: User[]) => {
+        this.users = response;
       },
-      (err) => {
-        console.log(err);
+      (error) => {
+        console.log(error);
       }
     );
   }
 
-  ngOnInit(): void {
+  public showUserDetail(id: number) {
+    this.router.navigate(['/user', id]);
   }
+
+  ngOnInit(): void {}
 }
