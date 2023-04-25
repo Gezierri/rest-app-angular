@@ -12,6 +12,10 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { InMemoryDataService } from './services/in-memory-data.service';
 import { UserDetailComponent } from './components/user/user-detail/user-detail.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { UserAddComponent } from './components/user/user-add/user-add.component';
+import { LoadingComponent } from './shared/loading/loading.component';
+import { NoimagePipe } from './pipes/noimage.pipe';
+
 
 @NgModule({
   declarations: [
@@ -21,6 +25,9 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     AboutComponent,
     ContactComponent,
     UserDetailComponent,
+    UserAddComponent,
+    LoadingComponent,
+    NoimagePipe,
   ],
   imports: [
     BrowserModule,
@@ -28,8 +35,10 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {
       dataEncapsulation: false,
+      delay: 1500,
     }),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

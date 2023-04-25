@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { ReqresService } from 'src/app/services/reqres.service';
 import { User } from 'src/app/user';
 
@@ -18,13 +18,20 @@ export class UserDetailComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private reqresService: ReqresService
+    private reqresService: ReqresService,
+    private router: Router
   ) {
     this.activatedRoute.params.subscribe((params) => {
       reqresService
         .getUser(params['id'])
-        .subscribe((response: User) => console.log((this.user = response)));
+        .subscribe((response: User) => (this.user = response));
     });
+  }
+
+  public save(): void {
+    this.reqresService
+      .updateUser(this.user)
+      .subscribe(() => this.router.navigate(['user']));
   }
 
   ngOnInit(): void {}

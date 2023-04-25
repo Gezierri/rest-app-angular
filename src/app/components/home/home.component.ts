@@ -10,16 +10,18 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
   users: User[] = [];
-
+  loading = true;
+  
   constructor(private reqresService: ReqresService, private router: Router) {
     this.getUsers();
   }
 
   public getUsers() {
-    console.log(this.reqresService.getUsers());
+    this.loading = true;
     this.reqresService.getUsers().subscribe(
       (response: User[]) => {
         this.users = response;
+        this.loading = false;
       },
       (error) => {
         console.log(error);
@@ -29,6 +31,15 @@ export class HomeComponent implements OnInit {
 
   public showUserDetail(id: number) {
     this.router.navigate(['/user', id]);
+  }
+
+  public addUser(): void {
+    this.router.navigate(['add']);
+  }
+
+  public deleteUser(user: any) {
+    this.users = this.users.filter((u) => u !== user);
+    this.reqresService.deleteUser(user).subscribe();
   }
 
   ngOnInit(): void {}
